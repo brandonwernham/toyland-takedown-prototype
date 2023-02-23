@@ -20,16 +20,21 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayerMask;
     public bool isGrounded;
 
-    public Transform orientation;
+    public Transform camOrientation;
+    public Transform playerOrientation;
     Vector3 moveDir;
     public float drag;
 
     public float knockbackForce;
+
+    public Transform cam;
     
     public Animator anim;
 
     void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
         capCollider = transform.GetComponent<CapsuleCollider>();
         readyToJump = true;
@@ -50,8 +55,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayerPhysics()
     {
+        Vector3 camDirection = new Vector3(camOrientation.eulerAngles.x, camOrientation.eulerAngles.y, camOrientation.eulerAngles.z);
         isGrounded = Physics.Raycast(capCollider.bounds.center, Vector3.down, 1.1f, groundLayerMask);
-        moveDir = orientation.forward * moveZ + orientation.right * moveX;
+        moveDir = playerOrientation.forward * moveZ + playerOrientation.right * moveX;
+        float targetAngle = Mathf.Atan2(camDirection.x, camDirection.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+
+        transform.rotation = Quaternion.Euler(0f, targetAngle - 90f, 0f);
         
         if (isGrounded)
         {

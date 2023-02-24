@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
-{
+public class PlayerMovement : MonoBehaviour {
     public float moveSpeed = 5f;
     Rigidbody rb;
     float moveX;
@@ -31,8 +30,7 @@ public class PlayerMovement : MonoBehaviour
     
     public Animator anim;
 
-    void Start()
-    {
+    void Start() {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
@@ -40,113 +38,92 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
     }
 
-    void Update()
-    {
+    void Update() {
         MyInput();
         DragControl();
         SpeedControl();
     }
 
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         PlayerPhysics();
         Jump();
     }
 
-    private void PlayerPhysics()
-    {
-        Vector3 camDirection = new Vector3(camOrientation.eulerAngles.x, camOrientation.eulerAngles.y, camOrientation.eulerAngles.z);
+    private void PlayerPhysics() {
+        
         isGrounded = Physics.Raycast(capCollider.bounds.center, Vector3.down, 1.1f, groundLayerMask);
         moveDir = playerOrientation.forward * moveZ + playerOrientation.right * moveX;
-        float targetAngle = Mathf.Atan2(camDirection.x, camDirection.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-
-        transform.rotation = Quaternion.Euler(0f, targetAngle - 90f, 0f);
         
-        if (isGrounded)
-        {
+        if (isGrounded) {
             rb.AddForce(moveDir.normalized * moveSpeed * 10f, ForceMode.Force);
         }
-        else if (!isGrounded)
-        {
+        else if (!isGrounded) {
             rb.AddForce(moveDir.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
     }
 
-    private void MyInput()
-    {
+    private void MyInput() {
         moveX = Input.GetAxisRaw("Horizontal");
         moveZ = Input.GetAxisRaw("Vertical");
 
-        if (moveX != 0 || moveZ != 0 && isGrounded)
-        {
+        Vector3 camDirection = new Vector3(camOrientation.eulerAngles.x, camOrientation.eulerAngles.y, camOrientation.eulerAngles.z);
+        float targetAngle = Mathf.Atan2(camDirection.x, camDirection.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+        transform.rotation = Quaternion.Euler(0f, targetAngle - 90f, 0f);
+
+        if (moveX != 0 || moveZ != 0 && isGrounded) {
             anim.SetFloat("speed", 1);
         }
-        else
-        {
+        else {
             anim.SetFloat("speed", 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
-        {
+        if (Input.GetKeyDown(KeyCode.W)) {
             Run();
         }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
+        else if (Input.GetKeyDown(KeyCode.S)) {
             moveSpeed = 5f;
         }
-        else if (!Input.GetKey(KeyCode.W) && Input.GetKeyDown(KeyCode.A))
-        {
+        else if (!Input.GetKey(KeyCode.W) && Input.GetKeyDown(KeyCode.A)) {
             moveSpeed = 5f;
         }
-        else if (!Input.GetKey(KeyCode.W) && Input.GetKeyDown(KeyCode.D))
-        {
+        else if (!Input.GetKey(KeyCode.W) && Input.GetKeyDown(KeyCode.D)) {
             moveSpeed = 5f;
         }
     }
 
-    public void Run()
-    {
+    public void Run() {
         float timeSinceTap = Time.time - previousTap;
 
-        if (timeSinceTap <= doubleTapTime)
-        {
+        if (timeSinceTap <= doubleTapTime) {
             moveSpeed = 8f;
         }
-        else
-        {
+        else {
             moveSpeed = 5f;
         }
 
         previousTap = Time.time;
     }
 
-    private void DragControl()
-    {
-        if (isGrounded)
-        {
+    private void DragControl() {
+        if (isGrounded) {
             rb.drag = drag;
         }
-        else
-        {
+        else {
             rb.drag = 0;
         }
     }
 
-    private void SpeedControl()
-    {
+    private void SpeedControl() {
         Vector3 constVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        if (constVelocity.magnitude > moveSpeed)
-        {
+        if (constVelocity.magnitude > moveSpeed) {
             Vector3 limitSpeed = constVelocity.normalized * moveSpeed;
             rb.velocity = new Vector3(limitSpeed.x, rb.velocity.y, limitSpeed.z);
         }
     }
 
-    private void Jump()
-    {
-        if (Input.GetKey(KeyCode.Space) && readyToJump && isGrounded)
-        {
+    private void Jump() {
+        if (Input.GetKey(KeyCode.Space) && readyToJump && isGrounded) {
             
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
@@ -155,13 +132,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void ResetJump()
-    {
+    private void ResetJump() {
         readyToJump = true;
     }
 
-    public void Knockback()
-    {
+    public void Knockback() {
         rb.AddForce(transform.up * knockbackForce, ForceMode.Impulse);
     }
 }

@@ -7,11 +7,19 @@ public class Enemy : MonoBehaviour {
     public Transform point1;
     public Transform point2;
     public Transform point3;
-    public Collider spotted;
     public int speed;
     public bool atPoint1 = false;
     public bool atPoint2 = false;
     public bool atPoint3 = false;
+
+    public float radius;
+    [Range(0, 360)]
+    public float angle;
+    public GameObject playerRef;
+    public LayerMask targetMask;
+    public LayerMask obstructionMask;
+    public bool spottedPlayer;
+
 
     void Start() {
         transform.position = point1.position;
@@ -20,10 +28,7 @@ public class Enemy : MonoBehaviour {
 
     void Update() {
         Patrol();
-
-        if (spotted.CompareTag("Player")) {
-            Chase();
-        }
+        FieldOfViewCheck();
     }
     
     public void Patrol() {
@@ -57,7 +62,26 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    public void Chase() {
+    public void FieldOfViewCheck() {
+        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
 
+        if (rangeChecks.Length != 0) {
+            Transform target = rangeChecks[0].transform;
+            Vector3 directionToTarget = (target.position - transform.position).normalized;
+
+            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2) {
+                float distanceToTarget = Vector3.Distance(transform.position, target.position);
+
+                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask)) {
+                    spottedPlayer = true;
+                } else {
+                    spottedPlayer = false;
+                }
+            } else {
+                spottedPlayer = false;
+            }
+        } else if (spottedPlayer) {
+            spottedPlayer = false;
+        }
     }
 }

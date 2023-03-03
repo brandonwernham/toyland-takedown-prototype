@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour {
     public LayerMask targetMask;
     public LayerMask obstructionMask;
     public bool spottedPlayer;
+    public int chasingSpeed;
 
 
     void Start() {
@@ -27,8 +28,13 @@ public class Enemy : MonoBehaviour {
     }
 
     void Update() {
-        Patrol();
         FieldOfViewCheck();
+
+        if (spottedPlayer) {
+            ChasePlayer();
+        } else {
+            Patrol();
+        }
     }
     
     public void Patrol() {
@@ -83,5 +89,12 @@ public class Enemy : MonoBehaviour {
         } else if (spottedPlayer) {
             spottedPlayer = false;
         }
+    }
+
+    public void ChasePlayer() {
+        float step = chasingSpeed * Time.deltaTime;
+
+        transform.LookAt(player);
+        transform.position = Vector3.MoveTowards(transform.position, player.position, step);
     }
 }

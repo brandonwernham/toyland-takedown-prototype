@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
     public float moveSpeed = 5f;
@@ -30,12 +31,18 @@ public class PlayerMovement : MonoBehaviour {
     
     public Animator anim;
 
+    public int maxHealth;
+    public int currentHealth;
+    public HealthBar healthBar;
+
     void Start() {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
         capCollider = transform.GetComponent<CapsuleCollider>();
         readyToJump = true;
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     void Update() {
@@ -47,6 +54,12 @@ public class PlayerMovement : MonoBehaviour {
     void FixedUpdate() {
         PlayerPhysics();
         Jump();
+    }
+
+    void OnCollisionEnter(Collision other) {
+        if (other.gameObject.CompareTag("Enemy")) {
+            TakeDamage(1);
+        }
     }
 
     private void PlayerPhysics() {
@@ -138,5 +151,18 @@ public class PlayerMovement : MonoBehaviour {
 
     public void Knockback() {
         rb.AddForce(transform.up * knockbackForce, ForceMode.Impulse);
+    }
+
+    public void TakeDamage(int damage) {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+
+        if (currentHealth <= 0) {
+            Die();
+        }
+    }
+
+    public void Die() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour {
 
     public GameObject cure;
 
+    public bool isSpotted;
+
     void Start() {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -45,6 +47,7 @@ public class PlayerMovement : MonoBehaviour {
         readyToJump = true;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        isSpotted = false;
     }
 
     void Update() {
@@ -60,7 +63,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision other) {
-        if (other.gameObject.CompareTag("Enemy")) {
+        if (other.gameObject.CompareTag("Enemy") && !other.gameObject.GetComponent<Enemy>().isCured) {
             TakeDamage(1);
             Knockback();
         }
@@ -172,7 +175,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public void PlaceCure() {
         Vector3 playerPos = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.E) && !isSpotted) {
             Instantiate(cure, playerPos, Quaternion.Euler(0, 0, 0));
         }
     }

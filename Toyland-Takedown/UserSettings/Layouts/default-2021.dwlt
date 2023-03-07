@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2194.286
     height: 1152
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 371}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 18
+  controlID: 109
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 19
+  controlID: 99
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 20
+  controlID: 100
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -382,22 +382,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Resources/ToyBox/Prefabs/Props
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Resources/ToyBox/Prefabs/Props
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\brand\Documents\UnityProjects\toyland-takedown-prototype\Toyland-Takedown
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 32.714294}
-    m_SelectedIDs: 6c5c0000
-    m_LastClickedID: 23660
-    m_ExpandedIDs: 000000006c5c00003c5e000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 108.714294}
+    m_SelectedIDs: 8e790000
+    m_LastClickedID: 31118
+    m_ExpandedIDs: 00000000aa5c0000b85c000078790000807900008a79000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -425,7 +425,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000006c5c0000
+    m_ExpandedIDs: 00000000aa5c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -555,7 +555,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: c6dcffffdaf5ffff1cfbffff02590000
+      m_ExpandedIDs: 5a75ffff1cfbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -656,7 +656,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25.142857}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-transform-toolbar
@@ -837,9 +837,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -11.989562, y: -6.6329274, z: 14.233168}
+    m_Target: {x: -4.001771, y: 6.4178, z: 27.634546}
     speed: 2
-    m_Value: {x: -11.989562, y: -6.6329274, z: 14.233168}
+    m_Value: {x: -4.001771, y: 6.4178, z: 27.634546}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -886,13 +886,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.08074654, y: -0.90894985, z: 0.3518266, w: 0.20861796}
+    m_Target: {x: -0.2975059, y: -0.6376721, z: 0.29306787, w: -0.64729816}
     speed: 2
-    m_Value: {x: 0.08074601, y: -0.9089439, z: 0.3518243, w: 0.20861658}
+    m_Value: {x: -0.29750305, y: -0.63766605, z: 0.29306507, w: -0.64729196}
   m_Size:
-    m_Target: 27.715128
+    m_Target: 6.1416373
     speed: 2
-    m_Value: 26.521654
+    m_Value: 6.1416373
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -989,7 +989,7 @@ MonoBehaviour:
       y: 21
       width: 1275.1428
       height: 695.7143
-    m_Scale: {x: 1.6409838, y: 1.6409839}
+    m_Scale: {x: 1.640984, y: 1.6409839}
     m_Translation: {x: 637.5714, y: 347.85715}
     m_MarginLeft: 0
     m_MarginRight: 0
@@ -997,9 +997,9 @@ MonoBehaviour:
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -388.52997
+      x: -388.52994
       y: -211.98083
-      width: 777.05994
+      width: 777.0599
       height: 423.96167
     m_MinimalGUI: 1
   m_defaultScale: 1
@@ -1030,9 +1030,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 813.1429
+    y: 810.28577
     width: 1533.8572
-    height: 340.4286
+    height: 343.2857
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default

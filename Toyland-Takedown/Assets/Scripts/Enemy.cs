@@ -23,7 +23,6 @@ public class Enemy : MonoBehaviour {
 
     public bool isCured;
 
-
     void Start() {
         transform.position = point1.position;
         atPoint1 = true;
@@ -31,8 +30,10 @@ public class Enemy : MonoBehaviour {
     }
 
     void Update() {
-        FieldOfViewCheck();
-
+        if (!isCured) {
+            FieldOfViewCheck();
+        }
+        
         if (spottedPlayer && !isCured) {
             ChasePlayer();
         } else if (isCured) {
@@ -44,6 +45,7 @@ public class Enemy : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Cure")) {
+            Destroy(other.gameObject);
             isCured = true;
         }
     }
@@ -91,11 +93,14 @@ public class Enemy : MonoBehaviour {
 
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask)) {
                     spottedPlayer = true;
+                    playerRef.GetComponent<PlayerMovement>().isSpotted = true;
                 } else {
                     spottedPlayer = false;
+                    playerRef.GetComponent<PlayerMovement>().isSpotted = false;
                 }
             } else {
                 spottedPlayer = false;
+                playerRef.GetComponent<PlayerMovement>().isSpotted = false;
             }
         } else if (spottedPlayer) {
             spottedPlayer = false;

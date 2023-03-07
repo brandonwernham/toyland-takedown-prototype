@@ -104,6 +104,7 @@ public class Enemy : MonoBehaviour {
             }
         } else if (spottedPlayer) {
             spottedPlayer = false;
+            playerRef.GetComponent<PlayerMovement>().isSpotted = false;
         }
     }
 

@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour {
     public int currentHealth;
     public HealthBar healthBar;
 
+    public GameObject cure;
+
     void Start() {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -49,6 +51,7 @@ public class PlayerMovement : MonoBehaviour {
         MyInput();
         DragControl();
         SpeedControl();
+        PlaceCure();
     }
 
     void FixedUpdate() {
@@ -59,6 +62,7 @@ public class PlayerMovement : MonoBehaviour {
     void OnCollisionEnter(Collision other) {
         if (other.gameObject.CompareTag("Enemy")) {
             TakeDamage(1);
+            Knockback();
         }
     }
 
@@ -164,5 +168,12 @@ public class PlayerMovement : MonoBehaviour {
 
     public void Die() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void PlaceCure() {
+        Vector3 playerPos = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
+        if (Input.GetKeyDown(KeyCode.E)) {
+            Instantiate(cure, playerPos, Quaternion.Euler(0, 0, 0));
+        }
     }
 }

@@ -21,19 +21,30 @@ public class Enemy : MonoBehaviour {
     public bool spottedPlayer;
     public int chasingSpeed;
 
+    public bool isCured;
+
 
     void Start() {
         transform.position = point1.position;
         atPoint1 = true;
+        isCured = false;
     }
 
     void Update() {
         FieldOfViewCheck();
 
-        if (spottedPlayer) {
+        if (spottedPlayer && !isCured) {
             ChasePlayer();
+        } else if (isCured) {
+            JumpUpAndDown();
         } else {
             Patrol();
+        }
+    }
+
+    void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Cure")) {
+            isCured = true;
         }
     }
     
@@ -96,5 +107,10 @@ public class Enemy : MonoBehaviour {
 
         transform.LookAt(player);
         transform.position = Vector3.MoveTowards(transform.position, player.position, step);
+    }
+
+    public void JumpUpAndDown() {
+        float y = Mathf.PingPong(Time.time, 0.5f) * 6 - 3;
+        transform.position = new Vector3(transform.position.x, y + 3f, transform.position.z);
     }
 }

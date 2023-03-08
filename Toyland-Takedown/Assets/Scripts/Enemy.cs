@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour {
 
     public bool isCured;
 
+    public float timeToDestroy = 5f;
+
     void Start() {
         transform.position = point1.position;
         atPoint1 = true;
@@ -118,5 +120,11 @@ public class Enemy : MonoBehaviour {
     public void JumpUpAndDown() {
         float y = Mathf.PingPong(Time.time, 0.5f) * 6 - 3;
         transform.position = new Vector3(transform.position.x, y + 3f, transform.position.z);
+        timeToDestroy -= Time.deltaTime;
+        if (timeToDestroy <= 0) {
+            spottedPlayer = false;
+            playerRef.GetComponent<PlayerMovement>().isSpotted = false;
+            Destroy(gameObject);
+        }
     }
 }

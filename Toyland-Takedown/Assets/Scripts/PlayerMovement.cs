@@ -38,6 +38,8 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject cure;
 
     public bool isSpotted;
+    public bool isRunning;
+    public bool isJumping;
 
     void Start() {
         Cursor.visible = false;
@@ -90,24 +92,52 @@ public class PlayerMovement : MonoBehaviour {
         float targetAngle = Mathf.Atan2(camDirection.x, camDirection.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
         transform.rotation = Quaternion.Euler(0f, targetAngle - 90f, 0f);
 
-        if (moveX != 0 || moveZ != 0 && isGrounded) {
-            anim.SetFloat("speed", 1);
+        if (!(moveX != 0 || moveZ != 0 && isGrounded) && !isJumping) {
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isRunning", false);
+            isRunning = false;
         }
-        else {
-            anim.SetFloat("speed", 0);
+        else if ((moveX != 0 || moveZ != 0 && isGrounded) && !isJumping && !isRunning) {
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isWalking", true);
+            anim.SetBool("isRunning", false);
+        }
+
+        if (isRunning && !isJumping) {
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isRunning", true);
         }
 
         if (Input.GetKeyDown(KeyCode.W)) {
+            if (!isRunning && !isJumping) {
+                anim.SetBool("isIdle", false);
+                anim.SetBool("isWalking", true);
+                anim.SetBool("isRunning", false);
+            }
             Run();
         }
-        else if (Input.GetKeyDown(KeyCode.S)) {
+        else if (Input.GetKeyDown(KeyCode.S) && !isJumping) {
+            isRunning = false;
             moveSpeed = 5f;
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isWalking", true);
+            anim.SetBool("isRunning", false);
         }
-        else if (!Input.GetKey(KeyCode.W) && Input.GetKeyDown(KeyCode.A)) {
+        else if (!Input.GetKey(KeyCode.W) && Input.GetKeyDown(KeyCode.A) && !isJumping) {
+            isRunning = false;
             moveSpeed = 5f;
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isWalking", true);
+            anim.SetBool("isRunning", false);
         }
-        else if (!Input.GetKey(KeyCode.W) && Input.GetKeyDown(KeyCode.D)) {
+        else if (!Input.GetKey(KeyCode.W) && Input.GetKeyDown(KeyCode.D) && !isJumping) {
+            isRunning = false;
             moveSpeed = 5f;
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isWalking", true);
+            anim.SetBool("isRunning", false);
         }
     }
 
@@ -115,6 +145,7 @@ public class PlayerMovement : MonoBehaviour {
         float timeSinceTap = Time.time - previousTap;
 
         if (timeSinceTap <= doubleTapTime) {
+            isRunning = true;
             moveSpeed = 8f;
         }
         else {
@@ -143,6 +174,18 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Jump() {
+        if (!isGrounded) {
+            isJumping = true;
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isJumping", true);
+        }
+        else {
+            isJumping = false;
+            anim.SetBool("isJumping", false);
+        }
+
         if (Input.GetKey(KeyCode.Space) && readyToJump && isGrounded) {
             
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);

@@ -51,6 +51,12 @@ public class Enemy : MonoBehaviour {
             isCured = true;
         }
     }
+
+    void OnCollisionEnter(Collision other) {
+        if (other.gameObject.CompareTag("Player")) {
+            print("player");
+        }
+    }
     
     public void Patrol() {
         float step = speed * Time.deltaTime;
@@ -114,7 +120,7 @@ public class Enemy : MonoBehaviour {
         float step = chasingSpeed * Time.deltaTime;
 
         transform.LookAt(player);
-        transform.position = Vector3.MoveTowards(transform.position, player.position, step);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x, transform.position.y, player.position.z), step);
     }
 
     public void JumpUpAndDown() {

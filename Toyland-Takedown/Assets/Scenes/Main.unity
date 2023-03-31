@@ -293,7 +293,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 426124013}
-  m_LocalRotation: {x: 0.089050286, y: 0.00000001623771, z: -0.0000000014517401, w: 0.9960272}
+  m_LocalRotation: {x: 0.08905028, y: -0.000000020709313, z: 0.0000000018515257, w: 0.9960272}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -301,6 +301,58 @@ Transform:
   - {fileID: 800168579}
   m_Father: {fileID: 1347130074}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &601074953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 601074956}
+  - component: {fileID: 601074954}
+  m_Layer: 0
+  m_Name: TreeGeneration
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &601074954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601074953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab8ad56dd26e768439df086353df4f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilePrefabs:
+  - {fileID: 5670120592282841514, guid: 7bdd3ad5650f96d468b180dd7cec163c, type: 3}
+  wallPrefab: {fileID: 0}
+  mapRows: 3
+  mapColumns: 3
+  tileSize: 36
+  wallHeight: 0
+  generateBorderWall: 0
+--- !u!4 &601074956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601074953}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -1962,9 +2014,12 @@ MonoBehaviour:
   tilePrefabs:
   - {fileID: 7176930153238598208, guid: 5d426419fddc9204e9dcb2d61e3d5c3e, type: 3}
   - {fileID: 4075837750783334608, guid: 16ce7a0c28fc6764487577d9fe868726, type: 3}
+  wallPrefab: {fileID: 123996, guid: d65002cb2df73b749a881132d5483f89, type: 3}
   mapRows: 3
   mapColumns: 3
   tileSize: 36
+  wallHeight: 2
+  generateBorderWall: 1
 --- !u!4 &1193338449
 Transform:
   m_ObjectHideFlags: 0

@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour {
     public int currentHealth;
     public HealthBar healthBar;
 
-    public GameObject cure;
+    public GameObject gem;
 
     public bool isSpotted;
     public bool isRunning;
@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour {
         MyInput();
         DragControl();
         SpeedControl();
-        PlaceCure();
+        PlaceGem();
     }
 
     void FixedUpdate() {
@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision other) {
-        if (other.gameObject.CompareTag("Enemy") && !other.gameObject.GetComponent<Enemy>().isCured) {
+        if (other.gameObject.CompareTag("Enemy") && !other.gameObject.GetComponent<Enemy>().isDead) {
             TakeDamage(1);
             Knockback();
         }
@@ -216,10 +216,10 @@ public class PlayerMovement : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void PlaceCure() {
+    public void PlaceGem() {
         Vector3 playerPos = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
         if (Input.GetKeyDown(KeyCode.E) && !isSpotted) {
-            Instantiate(cure, playerPos, Quaternion.Euler(0, 0, 0));
+            Instantiate(gem, playerPos, Quaternion.Euler(0, 0, 0));
         }
     }
 }

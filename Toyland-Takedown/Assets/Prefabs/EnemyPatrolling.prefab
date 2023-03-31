@@ -174,8 +174,8 @@ MonoBehaviour:
     m_Bits: 256
   spottedPlayer: 0
   chasingSpeed: 5
-  isCured: 0
-  timeToDestroy: 5
+  isDead: 0
+  timeToDestroy: 2
   patrolRadius: 7
   patrolSpeed: 20
 --- !u!1001 &3565736601791312568

@@ -14,9 +14,9 @@ public class Enemy : MonoBehaviour {
     public bool spottedPlayer;
     public int chasingSpeed;
 
-    public bool isCured;
+    public bool isDead;
 
-    public float timeToDestroy = 5f;
+    public float timeToDestroy = 2f;
 
     public float patrolRadius = 5f;
     public float patrolSpeed = 1f;
@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour {
     private Vector3 center;
 
     void Start() {
-        isCured = false;
+        isDead = false;
 
         player = GameObject.FindWithTag("Player").transform;
         playerRef = GameObject.FindWithTag("Player");
@@ -35,14 +35,14 @@ public class Enemy : MonoBehaviour {
     }
 
     void Update() {
-        if (!isCured) {
+        if (!isDead) {
             FieldOfViewCheck();
         }
         
-        if (spottedPlayer && !isCured) {
+        if (spottedPlayer && !isDead) {
             ChasePlayer();
-        } else if (isCured) {
-            JumpUpAndDown();
+        } else if (isDead) {
+            Die();
         } else {
             Patrol();
         }
@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Cure")) {
             Destroy(other.gameObject);
-            isCured = true;
+            isDead = true;
         }
     }
 
@@ -113,9 +113,7 @@ public class Enemy : MonoBehaviour {
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.position.x, transform.position.y, player.position.z), step);
     }
 
-    public void JumpUpAndDown() {
-        float y = Mathf.PingPong(Time.time, 0.5f) * 6 - 3;
-        transform.position = new Vector3(transform.position.x, y + 3f, transform.position.z);
+    public void Die() {
         timeToDestroy -= Time.deltaTime;
         if (timeToDestroy <= 0) {
             spottedPlayer = false;

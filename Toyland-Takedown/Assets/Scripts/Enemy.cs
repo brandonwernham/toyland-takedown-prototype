@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour {
 
     private float patrolAngle;
     private Vector3 center;
+    private Vector3 previousPatrolPosition;
+    private bool returningToPatrol;
 
     void Start() {
         isDead = false;
@@ -43,7 +45,9 @@ public class Enemy : MonoBehaviour {
             ChasePlayer();
         } else if (isDead) {
             Die();
-        } else {
+        } else if (returningToPatrol && !spottedPlayer) {
+            ReturnToPatrol();
+        } else if (!spottedPlayer && !returningToPatrol) {
             Patrol();
         }
     }
@@ -62,6 +66,8 @@ public class Enemy : MonoBehaviour {
     }
     
     public void Patrol() {
+        previousPatrolPosition = transform.position;
+
         patrolAngle += patrolSpeed * Time.deltaTime;
         if (patrolAngle >= 360f)
         {
@@ -77,6 +83,18 @@ public class Enemy : MonoBehaviour {
         Vector3 direction = new Vector3(Mathf.Cos((patrolAngle + 90) * Mathf.Deg2Rad), 0, Mathf.Sin((patrolAngle + 90) * Mathf.Deg2Rad));
 
         transform.rotation = Quaternion.LookRotation(direction);
+    }
+
+    public void ReturnToPatrol() {
+        float step = patrolSpeed * Time.deltaTime * 0.2f;
+
+        transform.position = Vector3.MoveTowards(transform.position, previousPatrolPosition, step);
+        transform.LookAt(previousPatrolPosition);
+
+        if (Vector3.Distance(transform.position, previousPatrolPosition) < 0.1f)
+        {
+            returningToPatrol = false;
+        }
     }
 
     public void FieldOfViewCheck() {
@@ -95,14 +113,17 @@ public class Enemy : MonoBehaviour {
                 } else {
                     spottedPlayer = false;
                     playerRef.GetComponent<PlayerMovement>().isSpotted = false;
+                    returningToPatrol = true;
                 }
             } else {
                 spottedPlayer = false;
                 playerRef.GetComponent<PlayerMovement>().isSpotted = false;
+                returningToPatrol = true;
             }
         } else if (spottedPlayer) {
             spottedPlayer = false;
             playerRef.GetComponent<PlayerMovement>().isSpotted = false;
+            returningToPatrol = true;
         }
     }
 

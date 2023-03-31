@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
     public Transform player;
-    public Transform point1;
-    public Transform point2;
-    public Transform point3;
-    public int speed;
-    public bool atPoint1 = false;
-    public bool atPoint2 = false;
-    public bool atPoint3 = false;
 
     public float radius;
     [Range(0, 360)]
@@ -25,10 +18,20 @@ public class Enemy : MonoBehaviour {
 
     public float timeToDestroy = 5f;
 
+    public float patrolRadius = 5f;
+    public float patrolSpeed = 1f;
+
+    private float patrolAngle;
+    private Vector3 center;
+
     void Start() {
-        transform.position = point1.position;
-        atPoint1 = true;
         isCured = false;
+
+        player = GameObject.FindWithTag("Player").transform;
+        playerRef = GameObject.FindWithTag("Player");
+
+        center = transform.position;
+        patrolAngle = Random.Range(0f, 360f);
     }
 
     void Update() {
@@ -59,34 +62,21 @@ public class Enemy : MonoBehaviour {
     }
     
     public void Patrol() {
-        float step = speed * Time.deltaTime;
-
-        if (atPoint1) {
-            transform.LookAt(point2);
-            transform.position = Vector3.MoveTowards(transform.position, point2.position, step); 
-        }
-        if (transform.position - point2.position == Vector3.zero) {
-            atPoint1 = false;
-            atPoint2 = true;
+        patrolAngle += patrolSpeed * Time.deltaTime;
+        if (patrolAngle >= 360f)
+        {
+            patrolAngle -= 360f;
         }
 
-        if (atPoint2) {
-            transform.LookAt(point3);
-            transform.position = Vector3.MoveTowards(transform.position, point3.position, step); 
-        }
-        if (transform.position - point3.position == Vector3.zero) {
-            atPoint2 = false;
-            atPoint3 = true;
-        }
+        float x = center.x + patrolRadius * Mathf.Cos(patrolAngle * Mathf.Deg2Rad);
+        float z = center.z + patrolRadius * Mathf.Sin(patrolAngle * Mathf.Deg2Rad);
 
-        if (atPoint3) {
-            transform.LookAt(point1);
-            transform.position = Vector3.MoveTowards(transform.position, point1.position, step); 
-        }
-        if (transform.position - point1.position == Vector3.zero) {
-            atPoint3 = false;
-            atPoint1 = true;
-        }
+        Vector3 targetPosition = new Vector3(x, transform.position.y, z);
+        transform.position = targetPosition;
+
+        Vector3 direction = new Vector3(Mathf.Cos((patrolAngle + 90) * Mathf.Deg2Rad), 0, Mathf.Sin((patrolAngle + 90) * Mathf.Deg2Rad));
+
+        transform.rotation = Quaternion.LookRotation(direction);
     }
 
     public void FieldOfViewCheck() {

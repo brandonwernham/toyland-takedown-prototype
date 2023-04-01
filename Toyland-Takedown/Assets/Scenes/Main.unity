@@ -293,7 +293,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 426124013}
-  m_LocalRotation: {x: 0.08905028, y: -0.000000020709313, z: 0.0000000018515257, w: 0.9960272}
+  m_LocalRotation: {x: 0.089050286, y: 0.00000001623771, z: -0.0000000014517401, w: 0.9960272}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1343,8 +1343,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.10710502, y: 0.000000004276852, z: -4.6072252e-10, w: 0.99424773}
-  m_LocalPosition: {x: 0.0000000027484337, y: 8.965586, z: -9.430533}
+  m_LocalRotation: {x: 0.10710502, y: -0.0000000042768513, z: 4.607224e-10, w: 0.99424773}
+  m_LocalPosition: {x: -0.0000000027484333, y: 8.965586, z: -9.430533}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2050,6 +2050,8 @@ MonoBehaviour:
   tileSize: 36
   wallHeight: 3
   generateBorderWall: 1
+  numOfCoins: 50
+  coin: {fileID: 2668446220636467317, guid: 6801d3e08c861fd428fc73f01bfa39af, type: 3}
 --- !u!4 &1193338449
 Transform:
   m_ObjectHideFlags: 0
@@ -2261,7 +2263,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273428853}
-  m_LocalRotation: {x: 0.10710501, y: 0.0000000042768518, z: -4.6072252e-10, w: 0.99424773}
+  m_LocalRotation: {x: 0.10710501, y: -0.000000004276851, z: 4.6072243e-10, w: 0.99424773}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

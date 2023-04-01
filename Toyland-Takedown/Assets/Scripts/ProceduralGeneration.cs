@@ -11,10 +11,13 @@ public class ProceduralGeneration : MonoBehaviour
     public float tileSize;
     public float wallHeight = 1f;
     public bool generateBorderWall = true;
+    public int numOfCoins;
+    public GameObject coin;
 
     private void Start()
     {
         GenerateMap();
+        GenerateCoins();
 
         if (generateBorderWall)
         {
@@ -56,6 +59,16 @@ public class ProceduralGeneration : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    public void GenerateCoins() {
+        for (int i = 1; i < numOfCoins; i++) {
+            float coinX = Random.Range(-15, tileSize * mapRows - 21);
+            float coinZ = Random.Range(-15, tileSize * mapColumns - 21);
+            Quaternion rotation = Quaternion.identity;
+
+            GameObject coinGen = Instantiate(coin, new Vector3(coinX, 0.7f, coinZ), rotation);
         }
     }
 }

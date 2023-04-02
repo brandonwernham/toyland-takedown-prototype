@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour {
     private float patrolAngle;
     private Vector3 center;
     private Vector3 previousPatrolPosition;
-    private bool returningToPatrol;
+    public bool returningToPatrol;
 
     void Start() {
         isDead = false;
@@ -100,27 +100,26 @@ public class Enemy : MonoBehaviour {
     public void FieldOfViewCheck() {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
 
-        if (rangeChecks.Length != 0) {
+        if (rangeChecks.Length != 0) { // If the player is within the radius
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;
 
-            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2) {
+            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2) { // If the player is within the radius and within the angle
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
-                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask)) {
+                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask)) { // If there is no obstruction
                     spottedPlayer = true;
                     playerRef.GetComponent<PlayerMovement>().isSpotted = true;
-                } else {
+                } else { // If there is an obstruction
                     spottedPlayer = false;
                     playerRef.GetComponent<PlayerMovement>().isSpotted = false;
                     returningToPatrol = true;
                 }
-            } else {
+            } else { // If the player is within the raduis but NOT within the angle
                 spottedPlayer = false;
                 playerRef.GetComponent<PlayerMovement>().isSpotted = false;
-                returningToPatrol = true;
             }
-        } else if (spottedPlayer) {
+        } else if (spottedPlayer) { // If the player is completely out of range and still spotted, return to patrol
             spottedPlayer = false;
             playerRef.GetComponent<PlayerMovement>().isSpotted = false;
             returningToPatrol = true;

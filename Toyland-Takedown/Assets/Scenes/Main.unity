@@ -1657,7 +1657,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090071474}
-  m_LocalRotation: {x: 0.12517212, y: 0.000000026920622, z: -0.0000000033964243, w: 0.99213505}
+  m_LocalRotation: {x: 0.12517212, y: 0.000000026920624, z: -0.0000000033964245, w: 0.99213505}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2045,8 +2045,8 @@ MonoBehaviour:
   - {fileID: 4075837750783334608, guid: 16ce7a0c28fc6764487577d9fe868726, type: 3}
   - {fileID: 377881392254037707, guid: 2c017a4ddcc911040ba8e0f35b684d43, type: 3}
   wallPrefab: {fileID: 123996, guid: d65002cb2df73b749a881132d5483f89, type: 3}
-  mapRows: 5
-  mapColumns: 5
+  mapRows: 2
+  mapColumns: 2
   tileSize: 36
   wallHeight: 3
   generateBorderWall: 1

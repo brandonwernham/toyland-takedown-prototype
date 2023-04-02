@@ -50,7 +50,14 @@ public class PlayerMovement : MonoBehaviour {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         isSpotted = false;
+
         GemCount.gemCount = 3;
+        if (UpgradeManager.gemUpgrade1) {
+            GemCount.gemCount = 10;
+        }
+        if (UpgradeManager.gemUpgrade2) {
+            GemCount.gemCount = 50;
+        }
     }
 
     void Update() {

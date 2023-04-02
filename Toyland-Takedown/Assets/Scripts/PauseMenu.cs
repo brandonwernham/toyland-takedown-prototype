@@ -7,6 +7,8 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool isPaused = false;
     public GameObject pauseUI;
+    public AudioSource soundManager;
+    public AudioClip hoverSound;
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -17,6 +19,11 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }
+    }
+
+    public void HoverSound()
+    {
+        soundManager.PlayOneShot(hoverSound);
     }
 
     public void Resume() {

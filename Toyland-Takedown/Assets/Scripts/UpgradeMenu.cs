@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class UpgradeMenu : MonoBehaviour
 {
@@ -14,9 +15,12 @@ public class UpgradeMenu : MonoBehaviour
     public AudioSource soundManager;
     public AudioClip hoverSound;
     public AudioClip purchaseSound;
+    public TMP_Text coincountText;
 
     void Update()
     {
+        coincountText.text = "COINS: " + CoinCount.coinCount;
+
         if (CoinCount.coinCount < 10)
         {
             mu1.interactable = false;
@@ -90,24 +94,28 @@ public class UpgradeMenu : MonoBehaviour
 
     public void MU1()
     {
+        PurchaseSoundMU1();
         UpgradeManager.mapUpgrade1 = true;
         CoinCount.coinCount -= 10;
     }
 
     public void MU2()
     {
+        PurchaseSoundMU2();
         UpgradeManager.mapUpgrade2 = true;
         CoinCount.coinCount -= 30;
     }
 
     public void GU1()
     {
+        PurchaseSoundGU1();
         UpgradeManager.gemUpgrade1 = true;
         CoinCount.coinCount -= 10;
     }
 
     public void GU2()
     {
+        PurchaseSoundGU2();
         UpgradeManager.gemUpgrade2 = true;
         CoinCount.coinCount -= 30;
     }

@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public string gameMap;
-    public string upgradeMenu;
     public AudioSource soundManager;
     public AudioClip hoverSound;
 
@@ -29,7 +28,7 @@ public class MainMenu : MonoBehaviour
 
     public void UpgradeMenu()
     {
-        SceneManager.LoadScene(upgradeMenu);
+        SceneManager.LoadScene("UpgradeMenu");
     }
 
     public void Exit()

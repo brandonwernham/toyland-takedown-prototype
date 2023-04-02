@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CoinTrigger : MonoBehaviour
 {
-    public AudioSource soundManager;
     public AudioClip coinSound;
 
     void Start()
@@ -16,7 +15,7 @@ public class CoinTrigger : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            soundManager.PlayOneShot(coinSound);
+            AudioSource.PlayClipAtPoint(coinSound, transform.position);
             CoinCount.coinCount += 1;
             CoinCount.coinsThisGame += 1;
             Debug.Log("Coins: " + CoinCount.coinCount);

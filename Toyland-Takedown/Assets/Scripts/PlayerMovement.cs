@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         isSpotted = false;
+        GemCount.gemCount = 3;
     }
 
     void Update() {
@@ -213,13 +214,16 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void Die() {
+        CoinCount.coinCount -= CoinCount.coinsThisGame;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void PlaceGem() {
         Vector3 playerPos = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
-        if (Input.GetKeyDown(KeyCode.E) && !isSpotted) {
+        if (Input.GetKeyDown(KeyCode.E) && !isSpotted && GemCount.gemCount > 0) {
             Instantiate(gem, playerPos, Quaternion.Euler(0, 0, 0));
+            GemCount.gemCount -= 1;
+            print("Gems left: " + GemCount.gemCount);
         }
     }
 }

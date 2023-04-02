@@ -60,7 +60,7 @@ public class UpgradeMenu : MonoBehaviour
         soundManager.PlayOneShot(hoverSound);
     }
 
-    public void PurchaseSoundMU1()
+    public void PurchaseSound()
     {
         if (gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Button>().interactable)
         {
@@ -68,54 +68,30 @@ public class UpgradeMenu : MonoBehaviour
         }
     }
 
-    public void PurchaseSoundMU2()
-    {
-        if (gameObject.transform.GetChild(0).transform.GetChild(1).GetComponent<Button>().interactable)
-        {
-            soundManager.PlayOneShot(purchaseSound);
-        }
-    }
-
-    public void PurchaseSoundGU1()
-    {
-        if (gameObject.transform.GetChild(0).transform.GetChild(2).GetComponent<Button>().interactable)
-        {
-            soundManager.PlayOneShot(purchaseSound);
-        }
-    }
-
-    public void PurchaseSoundGU2()
-    {
-        if (gameObject.transform.GetChild(0).transform.GetChild(3).GetComponent<Button>().interactable)
-        {
-            soundManager.PlayOneShot(purchaseSound);
-        }
-    }
-
     public void MU1()
     {
-        PurchaseSoundMU1();
+        PurchaseSound();
         UpgradeManager.mapUpgrade1 = true;
         CoinCount.coinCount -= 10;
     }
 
     public void MU2()
     {
-        PurchaseSoundMU2();
+        PurchaseSound();
         UpgradeManager.mapUpgrade2 = true;
         CoinCount.coinCount -= 30;
     }
 
     public void GU1()
     {
-        PurchaseSoundGU1();
+        PurchaseSound();
         UpgradeManager.gemUpgrade1 = true;
         CoinCount.coinCount -= 10;
     }
 
     public void GU2()
     {
-        PurchaseSoundGU2();
+        PurchaseSound();
         UpgradeManager.gemUpgrade2 = true;
         CoinCount.coinCount -= 30;
     }

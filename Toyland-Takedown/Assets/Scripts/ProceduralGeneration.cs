@@ -6,8 +6,8 @@ public class ProceduralGeneration : MonoBehaviour
 {
     public GameObject[] tilePrefabs;
     public GameObject wallPrefab;
-    public int mapRows;
-    public int mapColumns;
+    public int mapRows = 2;
+    public int mapColumns = 2;
     public float tileSize;
     public float wallHeight = 1f;
     public bool generateBorderWall = true;
@@ -16,6 +16,14 @@ public class ProceduralGeneration : MonoBehaviour
 
     private void Start()
     {
+        if (UpgradeManager.mapUpgrade1) {
+            mapRows = 5;
+            mapColumns = 5;
+        }
+        if (UpgradeManager.mapUpgrade2) {
+            mapRows = 10;
+            mapColumns = 10;
+        }
         GenerateMap();
         GenerateCoins();
 

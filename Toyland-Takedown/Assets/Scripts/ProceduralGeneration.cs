@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ProceduralGeneration : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class ProceduralGeneration : MonoBehaviour
     public bool generateBorderWall = true;
     public int numOfCoins;
     public GameObject coin;
+    public GameObject[] enemies;
 
     private void Start()
     {
@@ -25,11 +27,26 @@ public class ProceduralGeneration : MonoBehaviour
             mapColumns = 10;
         }
         GenerateMap();
+
+        numOfCoins = 10;
+        if (UpgradeManager.mapUpgrade1) {
+            numOfCoins = 62;
+        }
+        if (UpgradeManager.mapUpgrade2) {
+            numOfCoins = 250;
+        }
         GenerateCoins();
 
         if (generateBorderWall)
         {
             GenerateBorderWall();
+        }
+
+        enemies = GameObject.FindGameObjectsWithTag("Enemy_Pad");
+        EnemyCount.enemyCount = enemies.Length;
+
+        if (EnemyCount.enemyCount == 0) {
+            SceneManager.LoadScene("Main");
         }
     }
 

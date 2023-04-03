@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 892576223102678751}
   m_Layer: 0
   m_Name: EnemyPatrolling
-  m_TagString: Untagged
+  m_TagString: Enemy_Pad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,6 +178,7 @@ MonoBehaviour:
   timeToDestroy: 2
   patrolRadius: 7
   patrolSpeed: 20
+  returningToPatrol: 0
 --- !u!1001 &3565736601791312568
 PrefabInstance:
   m_ObjectHideFlags: 0

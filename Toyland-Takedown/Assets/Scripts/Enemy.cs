@@ -138,6 +138,8 @@ public class Enemy : MonoBehaviour {
         if (timeToDestroy <= 0) {
             spottedPlayer = false;
             playerRef.GetComponent<PlayerMovement>().isSpotted = false;
+            EnemyCount.enemyCount -= 1;
+            print("Enemies Left: " + EnemyCount.enemyCount);
             Destroy(gameObject);
         }
     }

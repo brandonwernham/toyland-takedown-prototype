@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -40,6 +41,9 @@ public class PlayerMovement : MonoBehaviour {
     public bool isSpotted;
     public bool isRunning;
     public bool isJumping;
+    public TMP_Text cannotPlaceText;
+    float timeToDeleteText = 1;
+    public bool countDown = false;
 
     void Start() {
         Cursor.visible = false;
@@ -65,6 +69,10 @@ public class PlayerMovement : MonoBehaviour {
         DragControl();
         SpeedControl();
         PlaceGem();
+
+        if (countDown) {
+            CountDown();
+        }
     }
 
     void FixedUpdate() {
@@ -231,6 +239,21 @@ public class PlayerMovement : MonoBehaviour {
             Instantiate(gem, playerPos, Quaternion.Euler(0, 0, 0));
             GemCount.gemCount -= 1;
             print("Gems left: " + GemCount.gemCount);
+        } else if (Input.GetKeyDown(KeyCode.E) && isSpotted && GemCount.gemCount > 0) {
+            cannotPlaceText.text = "Can't place gem while being chased!";
+            countDown = true;
+        } else if (Input.GetKeyDown(KeyCode.E) && GemCount.gemCount <= 0) {
+            cannotPlaceText.text = "Out of gems! Better restart...";
+            countDown = true;
+        }
+    }
+
+    public void CountDown() {
+        timeToDeleteText -= Time.deltaTime;
+        if (timeToDeleteText <= 0) {
+            cannotPlaceText.text = "";
+            timeToDeleteText = 1;
+            countDown = false;
         }
     }
 }

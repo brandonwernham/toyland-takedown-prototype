@@ -48,6 +48,7 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        CoinCount.coinsThisGame = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -56,6 +57,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void MainMenu() {
+        CoinCount.coinsThisGame = 0;
         SceneManager.LoadScene("MainMenu");
     }
 }

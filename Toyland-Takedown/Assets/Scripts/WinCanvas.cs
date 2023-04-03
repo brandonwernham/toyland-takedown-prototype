@@ -15,6 +15,7 @@ public class WinCanvas : MonoBehaviour
             timeToMainMenu -= Time.deltaTime;
 
             if (timeToMainMenu <= 0) {
+                CoinCount.coinCount += CoinCount.coinsThisGame;
                 SceneManager.LoadScene("MainMenu");
             }
         }

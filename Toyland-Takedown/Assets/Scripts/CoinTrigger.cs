@@ -16,7 +16,6 @@ public class CoinTrigger : MonoBehaviour
         if (col.gameObject.CompareTag("Player"))
         {
             AudioSource.PlayClipAtPoint(coinSound, transform.position);
-            CoinCount.coinCount += 1;
             CoinCount.coinsThisGame += 1;
             Debug.Log("Coins: " + CoinCount.coinCount);
             Debug.Log("Coins this game: " + CoinCount.coinsThisGame);

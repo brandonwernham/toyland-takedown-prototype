@@ -135,6 +135,8 @@ public class Enemy : MonoBehaviour {
 
     public void Die() {
         timeToDestroy -= Time.deltaTime;
+        Animator anim = gameObject.GetComponent<Animator>();
+        anim.enabled = false;
         if (timeToDestroy <= 0) {
             spottedPlayer = false;
             playerRef.GetComponent<PlayerMovement>().isSpotted = false;

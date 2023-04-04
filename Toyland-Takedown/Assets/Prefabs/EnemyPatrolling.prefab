@@ -150,37 +150,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.08
   m_Center: {x: 0, y: 0.08, z: 0}
---- !u!114 &1680762901871818934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3055697935664250996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 520fa2fc583b18e41a977fddd2d81ce9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  radius: 15
-  angle: 100
-  playerRef: {fileID: 0}
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 128
-  obstructionMask:
-    serializedVersion: 2
-    m_Bits: 256
-  spottedPlayer: 0
-  chasingSpeed: 5
-  isDead: 0
-  timeToDestroy: 2
-  patrolRadius: 7
-  patrolSpeed: 20
-  returningToPatrol: 0
-  audioSource: {fileID: 1217299157241934403}
-  dieSound: {fileID: 8300000, guid: 732fb3df2c335824d8ddd30356351e66, type: 3}
 --- !u!82 &1217299157241934403
 AudioSource:
   m_ObjectHideFlags: 0
@@ -193,7 +162,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -277,6 +246,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1680762901871818934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055697935664250996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520fa2fc583b18e41a977fddd2d81ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  radius: 15
+  angle: 100
+  playerRef: {fileID: 0}
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 128
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 256
+  spottedPlayer: 0
+  chasingSpeed: 5
+  isDead: 0
+  timeToDestroy: 2
+  patrolRadius: 7
+  patrolSpeed: 20
+  returningToPatrol: 0
+  audioSource: {fileID: 1217299157241934403}
+  dieSound: {fileID: 8300000, guid: 732fb3df2c335824d8ddd30356351e66, type: 3}
 --- !u!1001 &3565736601791312568
 PrefabInstance:
   m_ObjectHideFlags: 0

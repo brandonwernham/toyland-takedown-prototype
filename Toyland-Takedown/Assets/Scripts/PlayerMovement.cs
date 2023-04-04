@@ -62,6 +62,10 @@ public class PlayerMovement : MonoBehaviour {
         if (UpgradeManager.gemUpgrade2) {
             GemCount.gemCount = 100;
         }
+
+        timeToDeleteText = 4;
+        cannotPlaceText.text = "Cure bots by pressing 'E' to drop a gem!";
+        countDown = true;
     }
 
     void Update() {

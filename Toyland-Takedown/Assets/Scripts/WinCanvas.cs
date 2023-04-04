@@ -7,10 +7,18 @@ public class WinCanvas : MonoBehaviour
 {
     public GameObject winUI;
     public float timeToMainMenu;
+    public AudioSource audioSource;
+    public AudioClip winSound;
+    int timesToPlay = 1;
 
     void Update()
     {
         if (EnemyCount.enemyCount <= 0) {
+            if (timesToPlay > 0) {
+                audioSource.PlayOneShot(winSound);
+                timesToPlay--;
+            }
+            
             winUI.SetActive(true);
             timeToMainMenu -= Time.deltaTime;
 

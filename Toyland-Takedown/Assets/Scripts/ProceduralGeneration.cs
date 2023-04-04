@@ -44,6 +44,7 @@ public class ProceduralGeneration : MonoBehaviour
 
         enemies = GameObject.FindGameObjectsWithTag("Enemy_Pad");
         EnemyCount.enemyCount = enemies.Length;
+        print("Enemies: " + EnemyCount.enemyCount);
 
         if (EnemyCount.enemyCount == 0) {
             SceneManager.LoadScene("Main");

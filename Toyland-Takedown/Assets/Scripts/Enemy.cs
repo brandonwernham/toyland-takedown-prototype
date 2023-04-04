@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
@@ -25,6 +26,9 @@ public class Enemy : MonoBehaviour {
     private Vector3 center;
     private Vector3 previousPatrolPosition;
     public bool returningToPatrol;
+    public AudioSource audioSource;
+    public AudioClip dieSound;
+    int timesToPlay = 1;
 
     void Start() {
         isDead = false;
@@ -135,6 +139,12 @@ public class Enemy : MonoBehaviour {
 
     public void Die() {
         timeToDestroy -= Time.deltaTime;
+        
+        if (timesToPlay > 0) {
+            audioSource.PlayOneShot(dieSound);
+            timesToPlay--;
+        }
+        
         Animator anim = gameObject.GetComponent<Animator>();
         anim.enabled = false;
         if (timeToDestroy <= 0) {
@@ -142,6 +152,11 @@ public class Enemy : MonoBehaviour {
             playerRef.GetComponent<PlayerMovement>().isSpotted = false;
             EnemyCount.enemyCount -= 1;
             print("Enemies Left: " + EnemyCount.enemyCount);
+
+            if (EnemyCount.enemyCount > 0) {
+                GemCount.gemCount += 1;
+            }
+            
             Destroy(gameObject);
         }
     }
